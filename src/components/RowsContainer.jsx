@@ -4,10 +4,10 @@ import { api } from "../utilites/tmdb";
 export default function RowsContainer() {
   return (
     <>
-      <Row url={api.moviesNowPlaying} />
-      {/* <Row endpoint={apis.moviesPopular} /> */}
-      {/* <Row endpoint={apis.moviesTopRated} /> */}
-      {/* <Row endpoint={apis.moviesUpcoming} /> */}
+      <Row url={api.moviesNowPlaying} title={"Now Playing"} titleShort={"now-playing"} />
+      <Row url={api.moviesPopular} title={"Popular"} titleShort={"popular"} />
+      <Row url={api.moviesTopRated} title={"Top rated"} titleShort={"top-rated"} />
+      <Row url={api.moviesUpcoming} title={"Upcoming"} titleShort={"upcoming"} />
     </>
   );
 }

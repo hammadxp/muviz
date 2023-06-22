@@ -1,5 +1,5 @@
 import MainRowItem from "./MainRowItem";
-import { mainRowContent } from "../../public/content/mainRow";
+import { mainRowContent } from "/public/content/mainRowContent";
 
 export default function MainRow() {
   return (

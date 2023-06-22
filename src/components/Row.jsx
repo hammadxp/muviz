@@ -1,19 +1,24 @@
 import { useQuery } from "react-query";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { apiKey } from "../utilites/auth";
 import RowItem from "./RowItem";
-import { Link } from "react-router-dom";
 
 async function fetchApi(url) {
+  // console.log(url, apiKey);
   return axios.get(url, { headers: { Authorization: `Bearer ${apiKey}` } }).then((res) => res.data);
 }
 
 export default function Row({ url, title, titleShort }) {
   const { isLoading, data } = useQuery(url, () => fetchApi(url), {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
+    // refetchOnMount: false,
+    // refetchOnWindowFocus: false,
   });
   const results = data?.results;
+
+  // console.log(url);
+  // console.log(data);
+  // console.log(url, title, titleShort);
 
   return (
     <div className="flex flex-col">

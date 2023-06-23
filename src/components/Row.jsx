@@ -5,37 +5,25 @@ import RowItem from "./RowItem";
 import { Link } from "react-router-dom";
 
 async function fetchApi(url) {
-  // console.log(url, apiKey);
-  // console.log("fetchApi: ", url, apiKey);
-  // console.log("fetchApi: ", apiKey);
+  console.log(url, apiKey);
   return axios.get(url, { headers: { Authorization: `Bearer ${apiKey}` } }).then((res) => res.data);
-  // const res = await fetch(url, { headers: { Authorization: `Bearer ${apiKey}` } });
-  // const data = await res.json();
-  // return data;
-  // return axios.get("https://api.themoviedb.org/3/movie/now_playing", { headers: { Authorization: `Bearer ${apiKey}` } }).then((res) => res.data);
 }
 
-export default function Row({ url, title, titleShort }) {
-  // const { isLoading, data } = useQuery(url, () => fetchApi(url), {
-  // refetchOnMount: false,
-  // refetchOnWindowFocus: false,
-  // });
+export default async function Row({ url }) {
+  // const { isLoading, data, error } = useQuery(["row", url], () => fetchApi(url));
 
-  // const data = fetchApi(url);
-  // const { data } = useQuery(titleShort, fetchApi);
-  // const { data } = useQuery("now playing", fetchApi);
-  // const { isLoading, data } = useQuery({ url, fetchApi });
-  // fuck useQuery
-  // const { data: movies } = useQuery(titleShort, () => fetchApi(url));
-  const { data, error } = useQuery(titleShort, () => fetchApi(url));
+  // const url = "https://api.themoviedb.org/3/movie/now_playing";
+  // const url = props.url
+
+  // console.log("url: ", url);
+  // console.log(props);
+
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${apiKey}` } });
+  const data = await res.json();
+
+  console.log("data", data);
 
   const results = data?.results;
-  // const results = movies?.results;
-
-  console.log("url: ", url);
-  console.log("data: ", data);
-  // console.log(url, title, titleShort);
-  console.log("error: ", error);
 
   return (
     <div className="flex flex-col">

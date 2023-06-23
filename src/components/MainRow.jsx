@@ -3,7 +3,7 @@ import { mainRowContent } from "/public/content/mainRowContent";
 
 export default function MainRow() {
   return (
-    <div className="max-w-8xl grid grid-cols-5 gap-6" id="main-row">
+    <div className="max-w-8xl mb-8 mt-14 grid grid-cols-5 gap-6" id="main-row">
       {mainRowContent.map((item) => {
         return <MainRowItem key={item.id} item={item} />;
       })}

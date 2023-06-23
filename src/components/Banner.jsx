@@ -10,19 +10,17 @@ async function fetchApi() {
 
 export default function Banner() {
   const { data } = useQuery("banner", () => fetchApi());
-  const results = data?.results.slice(0, 4);
+  const results = data?.results;
 
   return (
-    <div className="mb-8 flex w-full gap-6" id="banner">
-      <div className="relative h-96 w-2/3">
-        <img
-          src={backdropBaseURL + results?.[0].backdrop_path}
-          alt={results?.[0].name + "backdrop"}
-          className="h-full w-full rounded-xl object-cover shadow-2xl transition "
-        />
-
-        <div className="absolute bottom-0 left-0 w-full rounded-xl bg-gradient-to-t from-black to-transparent p-12">
-          <div className="flex max-w-md flex-col gap-6">
+    <div className="flex w-full gap-6" id="banner">
+      <div className="h-96 w-2/3">
+        <div
+          className={`bg-[linear-gradient(to_top,rgba(0,0,0,0.3),rgba(0,0,0,0)),url('${
+            backdropBaseURL + results?.[0].backdrop_path
+          }')] relative h-full rounded-xl bg-cover bg-center bg-no-repeat transition hover:scale-[.99]`}
+        >
+          <div className="absolute bottom-0 left-0 flex max-w-lg flex-col gap-4 p-12">
             <p>{results?.[0].overview}</p>
 
             <div className="flex gap-[12px]">
@@ -40,12 +38,12 @@ export default function Banner() {
       </div>
       <div className="flex h-96 w-1/3 flex-col gap-6">
         <img
-          src={backdropBaseURL + results?.[0].backdrop_path}
+          src={backdropBaseURL + results?.[1].backdrop_path}
           alt={results?.[0].name + "backdrop"}
           className="h-[calc(50%-12px)] w-full rounded-xl object-cover shadow-2xl transition hover:scale-[.99]"
         />
         <img
-          src={backdropBaseURL + results?.[0].backdrop_path}
+          src={backdropBaseURL + results?.[2].backdrop_path}
           alt={results?.[0].name + "backdrop"}
           className="h-[calc(50%-12px)] w-full rounded-xl object-cover shadow-2xl transition hover:scale-[.99]"
         />

@@ -4,24 +4,12 @@ import { apiKey } from "../utilites/auth";
 import RowItem from "./RowItem";
 import { Link } from "react-router-dom";
 
-async function fetchApi(url) {
-  console.log(url, apiKey);
+function fetchApi(url) {
   return axios.get(url, { headers: { Authorization: `Bearer ${apiKey}` } }).then((res) => res.data);
 }
 
-export default async function Row({ url }) {
-  // const { isLoading, data, error } = useQuery(["row", url], () => fetchApi(url));
-
-  // const url = "https://api.themoviedb.org/3/movie/now_playing";
-  // const url = props.url
-
-  // console.log("url: ", url);
-  // console.log(props);
-
-  const res = await fetch(url, { headers: { Authorization: `Bearer ${apiKey}` } });
-  const data = await res.json();
-
-  console.log("data", data);
+export default function Row({ url, title, titleShort }) {
+  const { isLoading, data, error } = useQuery(["row", titleShort], () => fetchApi(url));
 
   const results = data?.results;
 
@@ -37,7 +25,7 @@ export default async function Row({ url }) {
 
       {/* Row items area */}
       <div className="max-w-8xl flex gap-4 overflow-x-scroll p-1 [&::-webkit-scrollbar]:hidden">
-        {results.map((item) => {
+        {results?.map((item) => {
           return <RowItem key={item.id} item={item} />;
         })}
       </div>

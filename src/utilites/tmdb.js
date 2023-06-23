@@ -1,5 +1,6 @@
 export const baseURL = "https://api.themoviedb.org";
 export const posterBaseURL = "https://image.tmdb.org/t/p/w342";
+export const backdropBaseURL = "https://image.tmdb.org/t/p/original";
 
 export const api = {
   moviesNowPlaying: `${baseURL}/3/movie/now_playing`,

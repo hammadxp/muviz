@@ -1,7 +1,6 @@
 import Banner from "../components/Banner";
 import RowsContainer from "../components/RowsContainer";
 import MainRow from "../components/MainRow";
-import Temp from "../components/Temp";
 
 export default function Home() {
   return (
@@ -9,7 +8,6 @@ export default function Home() {
       <Banner />
       <MainRow />
       <RowsContainer />
-      {/* <Temp /> */}
     </div>
   );
 }

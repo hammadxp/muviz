@@ -12,13 +12,28 @@ export default function Banner() {
   const { data } = useQuery("banner", () => fetchApi());
   const results = data?.results;
 
+  const image = backdropBaseURL + results?.[0].backdrop_path;
+  // const image = results && backdropBaseURL + results[0].backdrop_path;
+  // const image2 = `bg-[linear-gradient(to_top,rgba(0,0,0,0.3),rgba(0,0,0,0)),url(${image})]`;
+  // const image3 = {
+  // backgroundImage: `linear-gradient(to_top,rgba(0,0,0,0.3),rgba(0,0,0,0)),url(${image})`,
+  // backgroundColor: "white",
+  // };
+  const image4 = `linear-gradient(to_top,rgba(0,0,0,0.3),rgba(0,0,0,0)),url(${image})`;
+  // const image5 = `linear-gradient(to_top,rgba(0,0,0,0.3),rgba(0,0,0,0)),url(${backdropBaseURL + results?.[0].backdrop_path})`;
+  const color = "red";
+  const color2 = "#000000";
+  const color3 = "#ffffff";
+  // console.log(image);
+
+  if (!results) return;
+
   return (
     <div className="flex w-full gap-6" id="banner">
       <div className="h-96 w-2/3">
         <div
-          className={`bg-[linear-gradient(to_top,rgba(0,0,0,0.3),rgba(0,0,0,0)),url('${
-            backdropBaseURL + results?.[0].backdrop_path
-          }')] relative h-full rounded-xl bg-cover bg-center bg-no-repeat transition hover:scale-[.99]`}
+          className={`relative h-full rounded-xl bg-cover bg-center bg-no-repeat transition hover:scale-[.99]`}
+          style={{ backgroundImage: image4, backgroundColor: color3 }}
         >
           <div className="absolute bottom-0 left-0 flex max-w-lg flex-col gap-4 p-12">
             <p>{results?.[0].overview}</p>

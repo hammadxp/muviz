@@ -12,45 +12,15 @@ export default function Banner() {
   const { data } = useQuery("banner", () => fetchApi());
   const results = data?.results;
 
-  const image = "https://image.tmdb.org/t/p/original/pQHg2NZpS5kvoENFMSt0ynzCFqd.jpg";
-  // const image = backdropBaseURL + results?.[0].backdrop_path;
-  // const image = results && backdropBaseURL + results[0].backdrop_path;
-
-  // const image2 = `bg-[linear-gradient(to_top,rgba(0,0,0,0.3),rgba(0,0,0,0)),url(${image})]`;
-  // const image3 = {
-  // backgroundImage: `linear-gradient(to_top,rgba(0,0,0,0.3),rgba(0,0,0,0)),url(${image})`,
-  // backgroundColor: "white",
-  // };
-  // const image4 = `linear-gradient(to_top,rgba(0,0,0,0.3),rgba(0,0,0,0)),url(${image})`;
-  // const image5 = `linear-gradient(to_top,rgba(0,0,0,0.3),rgba(0,0,0,0)),url(${backdropBaseURL + results?.[0].backdrop_path})`;
-  // const image6 = `linear-gradient(to_top,rgba(0,0,0,0.3),rgba(0,0,0,0)),url('https://image.tmdb.org/t/p/original/pQHg2NZpS5kvoENFMSt0ynzCFqd.jpg')`;
-  const image7 = "url('https://image.tmdb.org/t/p/original/pQHg2NZpS5kvoENFMSt0ynzCFqd.jpg')";
-  const image8 = "linear-gradient(to_top,rgba(0,0,0,0.3),rgba(0,0,0,0)),url('https://image.tmdb.org/t/p/original/pQHg2NZpS5kvoENFMSt0ynzCFqd.jpg')";
-  const image9 = {
-    background: "linear-gradient(to_top,rgba(0,0,0,0.3),rgba(0,0,0,0))",
-  };
-
-  const color = "red";
-  const color2 = "#000000";
-  const color3 = "#ffffff";
-  // console.log(image);
-
   if (!results) return;
 
   return (
     <div className="flex w-full gap-6" id="banner">
       <div className="h-96 w-2/3">
         <div
-          className={`relative h-full rounded-xl bg-cover bg-center bg-no-repeat transition hover:scale-[.99]`}
-          // style={{ backgroundImage: image7, backgroundColor: color3 }}
-          // style={{ backgroundImage: image8, backgroundColor: color3 }}
-          // style={{
-          // backgroundImage: `linear-gradient(to_top,rgba(0,0,0,1),rgba(0,0,0,1))`,
-          // backgroundImage: "url('https://image.tmdb.org/t/p/original/pQHg2NZpS5kvoENFMSt0ynzCFqd.jpg')",
-          // image9,
-          // }}
+          className={`relative h-full rounded-xl bg-[linear-gradient(to_top,rgba(0,0,0,0.3),rgba(0,0,0,0))] bg-cover bg-center bg-no-repeat transition hover:scale-[.99]`}
           style={{
-            backgroundImage: `linear-gradient(to_top,rgba(0,0,0,1),rgba(0,0,0,1)), url('https://image.tmdb.org/t/p/original/pQHg2NZpS5kvoENFMSt0ynzCFqd.jpg')`,
+            backgroundImage: `url(${backdropBaseURL + results?.[0].backdrop_path})`,
           }}
         >
           <div className="absolute bottom-0 left-0 flex max-w-lg flex-col gap-4 p-12">

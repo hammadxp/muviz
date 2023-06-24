@@ -18,9 +18,9 @@ export default function Banner() {
     <div className="flex w-full gap-6" id="banner">
       <div className="h-96 w-2/3">
         <div
-          className={`relative h-full rounded-xl bg-[linear-gradient(to_top,rgba(0,0,0,0.3),rgba(0,0,0,0))] bg-cover bg-center bg-no-repeat transition hover:scale-[.99]`}
+          className="relative h-full rounded-xl bg-cover bg-center bg-no-repeat transition hover:scale-[.99]"
           style={{
-            backgroundImage: `url(${backdropBaseURL + results?.[0].backdrop_path})`,
+            backgroundImage: `linear-gradient(to_top,rgba(0, 0, 0, 1) 0%,rgba(0, 0, 0, 0) 100%),url(${backdropBaseURL + results?.[0].backdrop_path})`,
           }}
         >
           <div className="absolute bottom-0 left-0 flex max-w-lg flex-col gap-4 p-12">

@@ -1,24 +1,20 @@
-import axios from "axios";
-import { useQuery } from "react-query";
-import { apiKey } from "../utilites/auth";
 import { backdropBaseURL } from "../utilites/tmdb";
 import { HiOutlinePlay, HiPlus } from "react-icons/hi2";
 import { Link } from "react-router-dom";
-
-async function fetchApi() {
-  return axios.get("https://api.themoviedb.org/3/trending/all/day", { headers: { Authorization: `Bearer ${apiKey}` } }).then((res) => res.data);
-}
+import { useFetchTrending } from "../hooks/useFetchTrending";
 
 export default function Banner() {
-  const { data } = useQuery("banner", () => fetchApi());
+  const { isLoading, isError, error, data } = useFetchTrending();
   const results = data?.results;
 
-  if (!results) return;
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="flex w-full gap-6" id="banner">
       <div className="h-96 w-2/3">
-        <Link to={results?.[0].id.toString()}>
+        <Link to={`${results[0].media_type}/${results[0].id.toString()}`}>
           <div
             className="relative h-full rounded-xl bg-cover bg-center bg-no-repeat transition hover:scale-[.99]"
             style={{
@@ -45,13 +41,13 @@ export default function Banner() {
 
       <div className="flex h-96 w-1/3 flex-col gap-6">
         <Link
-          to={results?.[1].id.toString()}
+          to={`${results[1].media_type}/${results[1].id.toString()}`}
           className="h-[calc(50%-12px)] w-full overflow-hidden rounded-xl shadow-2xl transition hover:scale-[.99]"
         >
           <img src={backdropBaseURL + results?.[1].backdrop_path} alt={results?.[0].name + "backdrop"} className=" object-cover " />
         </Link>
         <Link
-          to={results?.[2].id.toString()}
+          to={`${results[2].media_type}/${results[2].id.toString()}`}
           className="h-[calc(50%-12px)] w-full overflow-hidden rounded-xl shadow-2xl transition hover:scale-[.99]"
         >
           <img src={backdropBaseURL + results?.[2].backdrop_path} alt={results?.[0].name + "backdrop"} className="object-cover " />

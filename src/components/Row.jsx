@@ -7,8 +7,6 @@ export default function Row({ endpoint, id, title, type }) {
   const { isLoading, isError, error, data } = useFetchList(endpoint, id);
   const listItems = data?.results;
 
-  listItems && console.log("listItems: ", listItems);
-
   if (isLoading) {
     return <p>Loading...</p>;
   }

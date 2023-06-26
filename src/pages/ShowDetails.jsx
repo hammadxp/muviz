@@ -6,5 +6,9 @@ export default function ShowDetails() {
   const { showId } = useParams();
   const { isLoading, isError, error, data } = useFetchShowDetails(showId);
 
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   return <ItemDetails item={data} type="show" />;
 }

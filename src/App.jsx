@@ -7,9 +7,10 @@ import ShowDetails from "./pages/ShowDetails";
 // import MyMUI from "./components/MyMUI";
 // import MyFlowbite from "./components/MyFlowbite";
 // import MyShadcn from "./components/MyShadcn";
-// import MyHeadless from "./components/MyHeadless";
+import MyHeadless from "./components/MyHeadless";
 // import { MyMUITailwind } from "./components/MyMUITailwind";
-import MyDaisy from "./components/MyDaisy";
+// import MyDaisy from "./components/MyDaisy";
+import { MyRadix } from "./components/MyRadix";
 
 const queryClient = new QueryClient();
 
@@ -24,9 +25,10 @@ export default function App() {
           {/* <Route path="/mui" element={<MyMUI />} /> */}
           {/* <Route path="/flowbite" element={<MyFlowbite />} /> */}
           {/* <Route path="/shadcn" element={<MyShadcn />} /> */}
-          {/* <Route path="/headless" element={<MyHeadless />} /> */}
+          <Route path="/headless" element={<MyHeadless />} />
           {/* <Route path="/mui-tailwind" element={<MyMUITailwind />} /> */}
-          <Route path="/daisy" element={<MyDaisy />} />
+          {/* <Route path="/daisy" element={<MyDaisy />} /> */}
+          <Route path="/radix" element={<MyRadix />} />
         </Routes>
       </Router>
 

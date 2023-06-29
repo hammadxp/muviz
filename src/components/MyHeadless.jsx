@@ -1,12 +1,12 @@
 import { Tab } from "@headlessui/react";
 
-export function MyHeadless() {
+export default function MyHeadless() {
   return (
     <Tab.Group>
-      <Tab.List>
-        <Tab>Tab 1</Tab>
-        <Tab>Tab 2</Tab>
-        <Tab>Tab 3</Tab>
+      <Tab.List className="m-2 rounded-xl bg-blue-400 px-6 py-4">
+        <Tab>{({ selected }) => <button className={`rounded-xl px-6 py-3 ${selected ? "bg-white text-black" : ""}`}>Tab 1</button>}</Tab>
+        <Tab>{({ selected }) => <button className={`rounded-xl px-6 py-3 ${selected ? "bg-white text-black" : ""}`}>Tab 2</button>}</Tab>
+        <Tab>{({ selected }) => <button className={`rounded-xl px-6 py-3 ${selected ? "bg-white text-black" : ""}`}>Tab 3</button>}</Tab>
       </Tab.List>
       <Tab.Panels>
         <Tab.Panel>Content 1</Tab.Panel>

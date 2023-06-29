@@ -1,4 +1,7 @@
-import daisyui from "daisyui";
+// import { createRequire } from "module";
+// const require = createRequire(import.meta.url);
+// import daisyui from "daisyui";
+// import { Flowbite } from 'flowbite-react';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -10,5 +13,5 @@ export default {
       },
     },
   },
-  plugins: [daisyui],
+  // plugins: [require("daisyui"), require("flowbite/plugin")],
 };

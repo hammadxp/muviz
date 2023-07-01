@@ -2,7 +2,7 @@ export default function ItemDetailsBgImage({ children, bgImage }) {
   return (
     <>
       <div
-        className="w-full bg-cover bg-center bg-no-repeat"
+        className="h-[42rem] w-full bg-cover bg-top bg-no-repeat"
         style={{
           backgroundImage: `url(${bgImage})`,
         }}

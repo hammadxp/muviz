@@ -1,12 +1,12 @@
 import { useLocation, useParams } from "react-router-dom";
 import { useFetchItemDetails } from "../hooks/useFetchItemDetails";
 import { useFetchItemImages } from "../hooks/useFetchItemImages";
-import { useFetchSimilarItems } from "../hooks/useFetchSimilarItems";
+import { useFetchItemSimilar } from "../hooks/useFetchItemSimilar";
 import ItemDetails from "../components/ItemDetails";
 
 export default function ItemDetailsPage() {
   const url = useLocation();
-  const itemType = (url.pathname.includes("/movie/") && "movie") || (url.pathname.includes("/show/") && "tv");
+  const itemType = (url.pathname.includes("/movie/") && "movie") || (url.pathname.includes("/show/") && "show");
 
   const { movieId, showId } = useParams();
   const itemId = itemType === "movie" ? movieId : showId;
@@ -19,7 +19,7 @@ export default function ItemDetailsPage() {
     isError: similarItemsIsError,
     error: similarItemsError,
     data: similarItemsData,
-  } = useFetchSimilarItems(itemId, itemType);
+  } = useFetchItemSimilar(itemId, itemType);
 
   if (isLoading) {
     return <p>Loading...</p>;

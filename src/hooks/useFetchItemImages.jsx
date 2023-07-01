@@ -7,7 +7,9 @@ export function useFetchItemImages(itemId, itemType) {
     ["item-images", itemId],
     () =>
       axios
-        .get(`https://api.themoviedb.org/3/${itemType}/${itemId}/images`, { headers: { Authorization: `Bearer ${apiKey}` } })
+        .get(`https://api.themoviedb.org/3/${itemType === "show" ? "tv" : "movie"}/${itemId}/images`, {
+          headers: { Authorization: `Bearer ${apiKey}` },
+        })
         .then((res) => res.data),
     {
       refetchOnWindowFocus: false,

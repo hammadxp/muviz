@@ -5,7 +5,6 @@ import Home from "./pages/Home";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import NavBar from "./components/NavBar";
 import ItemDetailsPage from "./pages/ItemDetailsPage";
-import MyRadix from "./components/MyRadix";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +24,6 @@ export default function App() {
 
           <Route path="movie/:movieId" element={<ItemDetailsPage />} />
           <Route path="show/:showId" element={<ItemDetailsPage />} />
-          <Route path="/radix" element={<MyRadix />} />
         </Routes>
       </Router>
 

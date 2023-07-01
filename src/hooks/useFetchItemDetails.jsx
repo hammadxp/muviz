@@ -5,7 +5,10 @@ import { apiKey } from "../utilites/auth";
 export function useFetchItemDetails(itemId, itemType) {
   return useQuery(
     ["item-details", itemId],
-    () => axios.get(`https://api.themoviedb.org/3/${itemType}/${itemId}`, { headers: { Authorization: `Bearer ${apiKey}` } }).then((res) => res.data),
+    () =>
+      axios
+        .get(`https://api.themoviedb.org/3/${itemType === "show" ? "tv" : "movie"}/${itemId}`, { headers: { Authorization: `Bearer ${apiKey}` } })
+        .then((res) => res.data),
     {
       refetchOnWindowFocus: false,
     }

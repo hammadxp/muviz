@@ -6,8 +6,8 @@ export default function RowsContainer() {
       {/* <Row endpoint="https://api.themoviedb.org/3/trending/all/day" id="trending-all" title="Trending" type={null} />
       <Row endpoint="https://api.themoviedb.org/3/trending/person/day" id="trending-people" title="Trending people" type="people" /> */}
 
-      <Row endpoint="https://api.themoviedb.org/3/discover/movie" id="discover-movies" title="Discover movies" type="movie" />
-      <Row endpoint="https://api.themoviedb.org/3/discover/tv" id="discover-shows" title="Discover shows" type="show" />
+      <Row endpoint="https://api.themoviedb.org/3/discover/movie" id="discover-movies" title="Discover movies" rowType="movie" />
+      <Row endpoint="https://api.themoviedb.org/3/discover/tv" id="discover-shows" title="Discover shows" rowType="show" />
 
       {/* <Row endpoint="https://api.themoviedb.org/3/trending/all/day" id="trending-all" title="Trending" type={null} />
       <Row endpoint="https://api.themoviedb.org/3/trending/movie/day" id="trending-movies" title="Trending movies" type="movie" />

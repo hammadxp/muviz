@@ -2,10 +2,8 @@ import { HiHome, HiOutlineMagnifyingGlass, HiPlus, HiStar, HiVideoCamera, HiTv }
 import { NavLink } from "react-router-dom";
 
 export default function NavBar() {
-  // NavLink -> aria-[current=page]:bg-lime-400
-
   return (
-    <nav className="flex px-12 py-6 font-Rubik">
+    <nav className="fixed flex w-full px-12 py-6 font-Rubik backdrop-blur-3xl">
       <NavLink to="/">
         <span className="font-bold uppercase">Muviz</span>
       </NavLink>

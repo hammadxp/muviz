@@ -9,10 +9,10 @@ export default function ItemDetails({ item, images, similarMovies, type }) {
   return (
     <div className="bg-slate-900 text-white">
       <div
-        className={clsx("h-[36rem] w-full bg-cover bg-center bg-no-repeat", `bg-[url(${backdropBaseURL + item.backdrop_path})]`)}
-        // style={{
-        //   backgroundImage: `url(${backdropBaseURL + item.backdrop_path})`,
-        // }}
+        className={clsx("h-[36rem] w-full bg-cover bg-center bg-no-repeat")}
+        style={{
+          backgroundImage: `url(${backdropBaseURL + item?.backdrop_path})`,
+        }}
       >
         <div
           className="h-full w-full"

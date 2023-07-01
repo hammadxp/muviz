@@ -3,15 +3,16 @@ import { backdropBaseURL } from "../utilites/tmdb";
 import { HiPlay, HiPlus, HiUserGroup } from "react-icons/hi2";
 import calculateRuntime from "../utilites/calculateRuntime";
 import trimYear from "../utilites/trimYear";
+import clsx from "clsx";
 
 export default function ItemDetails({ item, images, similarMovies, type }) {
   return (
     <div className="bg-slate-900 text-white">
       <div
-        className="h-[36rem] w-full bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url(${backdropBaseURL + item.backdrop_path})`,
-        }}
+        className={clsx("h-[36rem] w-full bg-cover bg-center bg-no-repeat", `bg-[url(${backdropBaseURL + item.backdrop_path})]`)}
+        // style={{
+        //   backgroundImage: `url(${backdropBaseURL + item.backdrop_path})`,
+        // }}
       >
         <div
           className="h-full w-full"

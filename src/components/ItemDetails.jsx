@@ -58,22 +58,24 @@ export default function ItemDetails({ item, images, similarItems, itemType }) {
       </ItemDetailsBgImage>
 
       <div className="mx-auto max-w-7xl p-4">
-        <Tabs.Root defaultValue="itemSimilar" className="h-96">
-          <Tabs.List aria-label="Item extra details section" className="my-6 border-b-2 border-slate-50">
-            <Tabs.Trigger value="itemSimilar" className="px-4 py-2 text-lg uppercase data-[state=active]:border-b-4">
+        <Tabs.Root defaultValue="tab-similar" className="h-96">
+          <Tabs.List aria-label="Item extra details section" className="my-6 transition-all">
+            <Tabs.Trigger value="tab-similar" className="data-[state=active]:tab-selected relative px-4 py-2 text-lg uppercase">
               Similar
             </Tabs.Trigger>
-            <Tabs.Trigger value="itemCollection" className="px-4 py-2 text-lg uppercase data-[state=active]:border-b-4">
+            <Tabs.Trigger value="tab-collection" className="data-[state=active]:tab-selected relative px-4 py-2 text-lg uppercase">
               Collection
             </Tabs.Trigger>
-            <Tabs.Trigger value="itemDetails" className="px-4 py-2 text-lg uppercase data-[state=active]:border-b-4">
+            <Tabs.Trigger value="tab-details" className="data-[state=active]:tab-selected relative px-4 py-2 text-lg uppercase">
               Details
             </Tabs.Trigger>
+
+            <div className="h-[2px] w-full rounded-full bg-slate-700"></div>
           </Tabs.List>
 
           {/* Tabs Content */}
 
-          <Tabs.Content value="itemSimilar">
+          <Tabs.Content value="tab-similar">
             <div className="flex gap-4 overflow-x-scroll p-1 [&::-webkit-scrollbar]:hidden">
               {similarItems?.map((item) => {
                 return <RowItem key={item.id} item={item} rowType={itemType} />;
@@ -81,14 +83,26 @@ export default function ItemDetails({ item, images, similarItems, itemType }) {
             </div>
           </Tabs.Content>
 
-          <Tabs.Content value="itemCollection">
-            <Link to={`/collection/${item.belongs_to_collection?.id}`}>
-              <img src={backdropBaseURL + item.belongs_to_collection?.backdrop_path} alt="" className="w-40" />
-            </Link>
-            <p>{item.belongs_to_collection?.name}</p>
+          <Tabs.Content value="tab-collection">
+            <div className="grid grid-cols-4 gap-4">
+              {Array.from({ length: 6 }).map((_, i) => {
+                return (
+                  <div key={i} className="p-2">
+                    <Link to={`/collection/${item.belongs_to_collection.id}`}>
+                      <img
+                        src={backdropBaseURL + item.belongs_to_collection.backdrop_path}
+                        alt={item.belongs_to_collection.name + " backdrop"}
+                        className="w-full rounded-md"
+                      />
+                      <p className="w-fit pt-4">{item.belongs_to_collection.name}</p>
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
           </Tabs.Content>
 
-          <Tabs.Content value="itemDetails">
+          <Tabs.Content value="tab-details">
             <div className="mx-auto max-w-7xl px-4">
               <h2>{(itemType === "movie" && item.title) || (itemType === "show" && item.name)}</h2>
               <p>{item.tagline}</p>

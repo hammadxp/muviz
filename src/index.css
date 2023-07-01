@@ -6,4 +6,8 @@
   body {
     @apply bg-slate-900 font-Rubik text-slate-50;
   }
+
+  .tab-selected {
+    @apply after:absolute after:-bottom-[3px] after:left-0 after:h-1 after:w-full after:rounded-full after:bg-slate-50 after:content-[''];
+  }
 }

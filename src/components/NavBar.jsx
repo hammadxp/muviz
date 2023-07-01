@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 export default function NavBar() {
   return (
-    <nav className="fixed flex w-full px-12 py-6 font-Rubik backdrop-blur-3xl">
+    <nav className="fixed z-30 flex h-[72px] w-full items-center bg-slate-900 bg-opacity-50 px-12 backdrop-blur backdrop-filter">
       <NavLink to="/">
         <span className="font-bold uppercase">Muviz</span>
       </NavLink>

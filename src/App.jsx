@@ -1,10 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import Home from "./pages/Home";
-import PlaceholderPage from "./pages/PlaceholderPage";
+import HomePage from "./pages/HomePage";
 import NavBar from "./components/NavBar";
+import NavBarMargin from "./components/NavBarMargin";
 import ItemDetailsPage from "./pages/ItemDetailsPage";
+import SectionPage from "./pages/SectionPage";
+import UndefinedPage from "./pages/UndefinedPage";
+import UnfinishedPage from "./pages/UnfinishedPage";
 
 const queryClient = new QueryClient();
 
@@ -13,17 +16,21 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <Router>
         <NavBar />
+        <NavBarMargin />
+
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/search" element={<PlaceholderPage />} />
-          <Route path="/movies" element={<PlaceholderPage />} />
-          <Route path="/shows" element={<PlaceholderPage />} />
-          <Route path="/originals" element={<PlaceholderPage />} />
-          <Route path="/watchlist" element={<PlaceholderPage />} />
-          <Route path="/account" element={<PlaceholderPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/search" element={<UnfinishedPage />} />
+          <Route path="/movies" element={<SectionPage />} />
+          <Route path="/shows" element={<SectionPage />} />
+          <Route path="/originals" element={<UnfinishedPage />} />
+          <Route path="/watchlist" element={<UnfinishedPage />} />
+          <Route path="/account" element={<UnfinishedPage />} />
 
           <Route path="movie/:movieId" element={<ItemDetailsPage />} />
           <Route path="show/:showId" element={<ItemDetailsPage />} />
+
+          <Route path="*" element={<UndefinedPage />} />
         </Routes>
       </Router>
 

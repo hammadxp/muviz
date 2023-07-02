@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
-import { HiPlay, HiPlus, HiUserGroup } from "react-icons/hi2";
-import { backdropBaseURL } from "../utilites/tmdb";
-import calculateRuntime from "../utilites/calculateRuntime";
-import trimYear from "../utilites/trimYear";
-import ItemDetailsBgImage from "./ItemDetailsBgImage";
 import * as Tabs from "@radix-ui/react-tabs";
+import { HiPlay, HiPlus, HiUserGroup } from "react-icons/hi2";
+import trimYear from "../utilites/trimYear";
+import calculateRuntime from "../utilites/calculateRuntime";
+import { backdropBaseURL, logoBaseURL } from "../utilites/tmdb";
+import ItemDetailsBgImage from "./ItemDetailsBgImage";
 import RowItem from "./RowItem";
-import Row from "./Row";
+import { motion } from "framer-motion";
 
 export default function ItemDetails({ item, images, similarItems, itemType }) {
+  // const [selected, setSelected] = useState(false);
+
   if (!item) return;
 
   const bgImage = backdropBaseURL + item?.backdrop_path;
@@ -76,41 +78,96 @@ export default function ItemDetails({ item, images, similarItems, itemType }) {
           {/* Tabs Content */}
 
           <Tabs.Content value="tab-similar">
-            <div className="flex gap-4 overflow-x-scroll p-1 [&::-webkit-scrollbar]:hidden">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-4 overflow-x-scroll p-1 [&::-webkit-scrollbar]:hidden">
               {similarItems?.map((item) => {
                 return <RowItem key={item.id} item={item} rowType={itemType} />;
               })}
-            </div>
+            </motion.div>
           </Tabs.Content>
 
           <Tabs.Content value="tab-collection">
-            <div className="grid grid-cols-4 gap-4">
-              {Array.from({ length: 6 }).map((_, i) => {
-                return (
-                  <div key={i} className="p-2">
-                    <Link to={`/collection/${item.belongs_to_collection.id}`}>
-                      <img
-                        src={backdropBaseURL + item.belongs_to_collection.backdrop_path}
-                        alt={item.belongs_to_collection.name + " backdrop"}
-                        className="w-full rounded-md"
-                      />
-                      <p className="w-fit pt-4">{item.belongs_to_collection.name}</p>
-                    </Link>
-                  </div>
-                );
-              })}
-            </div>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-4 gap-x-4 gap-y-6 pb-6">
+              <div className="p-2">
+                <Link to={`/collection/${item.belongs_to_collection?.id}`}>
+                  <img
+                    src={backdropBaseURL + item.belongs_to_collection?.backdrop_path}
+                    alt={item.belongs_to_collection?.name + " backdrop"}
+                    className="w-full rounded-md shadow-lg transition hover:scale-[.97]"
+                  />
+                  <p className="mt-4 w-fit">{item.belongs_to_collection?.name}</p>
+                </Link>
+              </div>
+            </motion.div>
           </Tabs.Content>
 
           <Tabs.Content value="tab-details">
-            <div className="mx-auto max-w-7xl px-4">
-              <h2>{(itemType === "movie" && item.title) || (itemType === "show" && item.name)}</h2>
-              <p>{item.tagline}</p>
-              <a href={item.homepage} target="_blank" rel="noreferrer">
-                Homepage
-              </a>
-              <a href={`https://www.imdb.com/title/${item.imdb_id}`}>IMDb</a>
-            </div>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="px-2">
+              <p>Title: {(itemType === "movie" && item.title) || (itemType === "show" && item.name)}</p>
+              <p>Tagline: {item.tagline}</p>
+              <p>Collection: {item.belongs_to_collection?.name}</p>
+              <br />
+
+              <p>Runtime: {calculateRuntime(itemType === "movie" ? item.runtime : item.episode_run_time)}</p>
+              <p>Release Date: {item.release_date}</p>
+              <br />
+
+              <div>
+                <p>
+                  Genres:{" "}
+                  {item.genres.map((genre, i) => {
+                    return `${genre.name}${item.genres.length === i + 1 ? "" : ", "}`;
+                  })}
+                </p>
+              </div>
+              <div>
+                <p>
+                  Spoken Languages:{" "}
+                  {item.spoken_languages.map((lang, i) => {
+                    return `${lang.english_name}${item.spoken_languages.length === i + 1 ? "" : ", "}`;
+                  })}
+                </p>
+              </div>
+              <br />
+
+              <p>
+                Homepage:{" "}
+                <a href={item.homepage} target="_blank" rel="noreferrer">
+                  {item.homepage}
+                </a>
+              </p>
+              <p>
+                IMDb:{" "}
+                <a href={item.imdb_id} target="_blank" rel="noreferrer">
+                  {item.imdb_id}
+                </a>
+              </p>
+              <br />
+
+              <div>
+                <p>
+                  Production Countries:{" "}
+                  {item.production_countries.map((country, i) => {
+                    return `${country.name}${item.production_countries.length === i + 1 ? "" : ", "}`;
+                  })}
+                </p>
+              </div>
+              <div>
+                <p>Production Companies:</p>
+                <div className="grid grid-cols-4 gap-x-4 gap-y-6 py-4">
+                  {item.production_companies.map((company, i) => {
+                    return (
+                      <div key={i} className="flex h-28 items-center justify-center overflow-hidden rounded-md bg-slate-800 p-4">
+                        {company.logo_path ? (
+                          <img src={logoBaseURL + company.logo_path} alt="" className="w-full rounded-md shadow-lg transition hover:scale-[.97]" />
+                        ) : (
+                          <p className="text-xl font-bold uppercase text-slate-400">{company.name}</p>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </motion.div>
           </Tabs.Content>
         </Tabs.Root>
       </div>

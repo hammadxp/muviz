@@ -28,9 +28,11 @@ export default function Row({ endpoint, id, title, rowType }) {
       <div className="max-w-8xl flex gap-4 overflow-x-scroll p-1 [&::-webkit-scrollbar]:hidden">
         {data?.results.map((item) => {
           if (rowType === "movie" || rowType === "show") {
-            return <RowItem key={item.id} item={item} type={rowType ? rowType : item.media_type} />;
+            return <RowItem key={item.id} item={item} type={rowType} />;
+          } else if (rowType === "mixed") {
+            return <RowItem key={item.id} item={item} type={item.media_type} />;
           } else if (rowType === "people") {
-            return <RowItemPeople key={item.id} item={item} type={rowType ? rowType : item.media_type} />;
+            return <RowItemPeople key={item.id} item={item} type={rowType} />;
           }
         })}
       </div>

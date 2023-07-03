@@ -3,17 +3,15 @@ import * as Tabs from "@radix-ui/react-tabs";
 import { HiPlay, HiPlus, HiUserGroup } from "react-icons/hi2";
 import trimYear from "../utilites/trimYear";
 import calculateRuntime from "../utilites/calculateRuntime";
-import { backdropBaseURL, logoBaseURL } from "../utilites/tmdb";
+import { backdropBaseURL, backdropLargeBaseURL, logoBaseURL } from "../utilites/tmdb";
 import ItemDetailsBgImage from "./ItemDetailsBgImage";
 import RowItem from "./RowItem";
 import { motion } from "framer-motion";
 
 export default function ItemDetails({ item, images, similarItems, itemType }) {
-  // const [selected, setSelected] = useState(false);
-
   if (!item) return;
 
-  const bgImage = backdropBaseURL + item?.backdrop_path;
+  const bgImage = backdropLargeBaseURL + item?.backdrop_path;
 
   return (
     <div>
@@ -21,7 +19,7 @@ export default function ItemDetails({ item, images, similarItems, itemType }) {
         <div className="mx-auto max-w-7xl px-4 py-32">
           {/* Title logo */}
           <div className="flex h-48 w-80 items-start justify-center py-4">
-            <img src={backdropBaseURL + images?.logos[0].file_path} alt="item logo" />
+            <img src={backdropLargeBaseURL + images?.logos[0].file_path} alt="item logo" />
           </div>
 
           {/* Release Year & Runtime */}
@@ -160,7 +158,7 @@ export default function ItemDetails({ item, images, similarItems, itemType }) {
                         {company.logo_path ? (
                           <img src={logoBaseURL + company.logo_path} alt="" className="w-full rounded-md shadow-lg transition hover:scale-[.97]" />
                         ) : (
-                          <p className="text-xl font-bold uppercase text-slate-400">{company.name}</p>
+                          <p className="text-center text-xl font-bold uppercase text-slate-400">{company.name}</p>
                         )}
                       </div>
                     );

@@ -23,7 +23,7 @@ export default function App() {
           <Route path="/search" element={<UnfinishedPage />} />
           <Route path="/movies" element={<SectionPage />} />
           <Route path="/shows" element={<SectionPage />} />
-          <Route path="/originals" element={<UnfinishedPage />} />
+          <Route path="/originals" element={<SectionPage />} />
           <Route path="/watchlist" element={<UnfinishedPage />} />
           <Route path="/account" element={<UnfinishedPage />} />
 
@@ -34,7 +34,7 @@ export default function App() {
         </Routes>
       </Router>
 
-      {/* <ReactQueryDevtools position="bottom-right" initialIsOpen={false} /> */}
+      <ReactQueryDevtools position="bottom-left" initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

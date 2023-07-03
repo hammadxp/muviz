@@ -27,12 +27,10 @@ export default function Row({ endpoint, id, title, rowType }) {
       {/* Row items area */}
       <div className="max-w-8xl flex gap-4 overflow-x-scroll p-1 [&::-webkit-scrollbar]:hidden">
         {data?.results.map((item) => {
-          if (rowType === "movie" || rowType === "show") {
+          if (rowType === "movie" || rowType === "show" || rowType === "people") {
             return <RowItem key={item.id} item={item} type={rowType} />;
           } else if (rowType === "mixed") {
-            return <RowItem key={item.id} item={item} type={item.media_type} />;
-          } else if (rowType === "people") {
-            return <RowItemPeople key={item.id} item={item} type={rowType} />;
+            return <RowItem key={item.id} item={item} type={item.media_type === "tv" ? "show" : item.media_type} />;
           }
         })}
       </div>

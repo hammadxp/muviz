@@ -21,6 +21,11 @@ export default function SectionPage() {
       title = "Shows";
       sectionType = "show";
       break;
+    case "/originals":
+      endpoint = `${endpointBase}/trending/all/day`;
+      title = "Originals";
+      sectionType = "mixed";
+      break;
   }
 
   const { isLoading, isError, error, data } = useFetchSection(endpoint, url.pathname);

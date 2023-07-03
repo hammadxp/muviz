@@ -3,21 +3,23 @@ import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function SectionItem({ item, sectionType }) {
+  const itemType = sectionType === "mixed" ? item.media_type : sectionType;
+
   return (
     <>
-      <Link to={"/" + sectionType + "/" + item.id.toString()} key={item.id} className="h-full w-full bg-slate-800 p-2">
-        <div className="h-48 w-full overflow-hidden rounded-md bg-slate-700 shadow-lg transition hover:scale-[.97]">
+      <div key={item.id} className="h-full w-full p-2">
+        <Link to={"/" + sectionType + "/" + item.id.toString()} className="block transition hover:scale-[.97]">
           <LazyLoadImage
             src={backdropBaseURL + item.backdrop_path}
             alt={item.title + "backdrop"}
-            placeholderSrc="/public/images/vite.svg"
-            height={"100%"}
+            height={192}
             width={"100%"}
-            className="h-full w-full object-cover object-center"
+            className="h-full w-full rounded-md object-cover object-center shadow-lg"
+            placeholderSrc="images/placeholder-image.svg"
           />
-        </div>
-        <p className="mt-4">{item.title}</p>
-      </Link>
+          <p className="my-2">{itemType === "movie" ? item.title : item.name}</p>
+        </Link>
+      </div>
     </>
   );
 }

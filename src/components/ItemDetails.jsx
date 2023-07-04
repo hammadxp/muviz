@@ -1,40 +1,66 @@
-import { Link } from "react-router-dom";
 import * as Tabs from "@radix-ui/react-tabs";
 import { HiPlay, HiPlus, HiUserGroup } from "react-icons/hi2";
 import trimYear from "../utilites/trimYear";
 import calculateRuntime from "../utilites/calculateRuntime";
-import { backdropBaseURL, backdropLargeBaseURL, logoBaseURL } from "../utilites/tmdb";
+import { backdropLargeBaseURL, logoBaseURL, logoLargeBaseURL } from "../utilites/tmdb";
 import ItemDetailsBgImage from "./ItemDetailsBgImage";
-import RowItem from "./RowItem";
 import { motion } from "framer-motion";
+import PosterTall from "./PosterTall";
+import PosterCollection from "./PosterCollection";
+import PosterEpisode from "./PosterEpisode";
 
-export default function ItemDetails({ item, images, similarItems, itemType }) {
+export default function ItemDetails({ item, images, similarItems, episodes, itemType }) {
   if (!item) return;
+
+  const title = (itemType === "movie" && item.title) || (itemType === "show" && item.name) || (itemType === "people" && item.name);
+  const tagline = item.tagline;
+  const collection = item.belongs_to_collection || null;
+  const runtime = (itemType === "movie" && calculateRuntime(item.runtime)) || null;
+  const release_date = (itemType === "movie" && trimYear(item.release_date)) || null;
+  const genres = item.genres.map((genre, i) => `${genre.name}${item.genres.length === i + 1 ? "" : ", "}`);
+
+  const totalSeasons = (itemType === "show" && item.number_of_seasons) || null;
+  const totalEpisodes = (itemType === "show" && item.number_of_episodes) || null;
+  const latestSeason = (itemType === "show" && item.last_episode_to_air.season_number) || null;
+  const latestEpisode = (itemType === "show" && item.last_episode_to_air.episode_number) || null;
+  const latestEpisodeAirDate = (itemType === "show" && trimYear(item.last_episode_to_air.air_date)) || null;
+  const latestEpisodeRuntime = (itemType === "show" && calculateRuntime(item.last_episode_to_air.runtime)) || null;
 
   const bgImage = backdropLargeBaseURL + item?.backdrop_path;
 
   return (
     <div>
       <ItemDetailsBgImage bgImage={bgImage}>
-        <div className="mx-auto max-w-7xl px-4 py-32">
+        <div className="mx-auto max-w-7xl px-4 py-16">
           {/* Title logo */}
-          <div className="flex h-48 w-80 items-start justify-center py-4">
-            <img src={backdropLargeBaseURL + images?.logos[0].file_path} alt="item logo" />
+          <div className="flex h-48 w-80 items-center justify-center">
+            {images?.logos.length === 0 || images?.logos === undefined ? (
+              <span className="text-7xl font-bold uppercase">{title}</span>
+            ) : (
+              <img src={logoLargeBaseURL + images?.logos[0]?.file_path} alt="item logo" className="max-h-48" />
+            )}
           </div>
 
           {/* Release Year & Runtime */}
-          <div className="flex gap-1 font-semibold">
-            <p>{trimYear(itemType === "movie" ? item.release_date : item.last_air_date)}</p>
-            <span>&middot;</span>
-            <p>{calculateRuntime(itemType === "movie" ? item.runtime : item.episode_run_time)}</p>
-          </div>
+          {itemType === "movie" && (
+            <div className="flex gap-1 font-semibold">
+              <span>{release_date}</span>
+              <span>&middot;</span>
+              <span>{runtime}</span>
+            </div>
+          )}
+
+          {itemType === "show" && (
+            <div className="flex gap-1 font-semibold">
+              <span>{latestEpisodeAirDate}</span>
+              <span>&middot;</span>
+              <span>S{latestSeason}</span>
+              <span>E{latestEpisode}</span>
+            </div>
+          )}
 
           {/* Genres */}
-          <p className="py-1">
-            {item.genres.map((genre, i) => {
-              return `${genre.name}${item.genres.length === i + 1 ? "" : ", "}`;
-            })}
-          </p>
+          <p className="py-1">{genres}</p>
 
           {/* Buttons */}
           <div className="flex gap-4 py-6">
@@ -58,14 +84,18 @@ export default function ItemDetails({ item, images, similarItems, itemType }) {
       </ItemDetailsBgImage>
 
       <div className="mx-auto max-w-7xl p-4">
-        <Tabs.Root defaultValue="tab-similar" className="h-96">
+        <Tabs.Root defaultValue={(collection && "tab-collection") || (itemType === "show" && "tab-episodes") || "tab-details"}>
           <Tabs.List aria-label="Item extra details section" className="my-6 transition-all">
-            <Tabs.Trigger value="tab-similar" className="data-[state=active]:tab-selected relative px-4 py-2 text-lg uppercase">
-              Similar
-            </Tabs.Trigger>
-            <Tabs.Trigger value="tab-collection" className="data-[state=active]:tab-selected relative px-4 py-2 text-lg uppercase">
-              Collection
-            </Tabs.Trigger>
+            {collection && (
+              <Tabs.Trigger value="tab-collection" className="data-[state=active]:tab-selected relative px-4 py-2 text-lg uppercase">
+                Collection
+              </Tabs.Trigger>
+            )}
+            {itemType === "show" && (
+              <Tabs.Trigger value="tab-episodes" className="data-[state=active]:tab-selected relative px-4 py-2 text-lg uppercase">
+                Episodes
+              </Tabs.Trigger>
+            )}
             <Tabs.Trigger value="tab-details" className="data-[state=active]:tab-selected relative px-4 py-2 text-lg uppercase">
               Details
             </Tabs.Trigger>
@@ -75,47 +105,46 @@ export default function ItemDetails({ item, images, similarItems, itemType }) {
 
           {/* Tabs Content */}
 
-          <Tabs.Content value="tab-similar">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-4 overflow-x-scroll p-1 [&::-webkit-scrollbar]:hidden">
-              {similarItems?.map((item) => {
-                return <RowItem key={item.id} item={item} rowType={itemType} />;
-              })}
-            </motion.div>
-          </Tabs.Content>
+          {collection && (
+            <Tabs.Content value="tab-collection">
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-4 gap-x-4 gap-y-6">
+                <PosterCollection title={collection.name} posterId={collection.backdrop_path} collectionId={collection.id} />
+              </motion.div>
+            </Tabs.Content>
+          )}
 
-          <Tabs.Content value="tab-collection">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-4 gap-x-4 gap-y-6 pb-6">
-              <div className="p-2">
-                <Link to={`/collection/${item.belongs_to_collection?.id}`}>
-                  <img
-                    src={backdropBaseURL + item.belongs_to_collection?.backdrop_path}
-                    alt={item.belongs_to_collection?.name + " backdrop"}
-                    className="w-full rounded-md shadow-lg transition hover:scale-[.97]"
-                  />
-                  <p className="mt-4 w-fit">{item.belongs_to_collection?.name}</p>
-                </Link>
-              </div>
+          <Tabs.Content value="tab-episodes">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-4 overflow-x-scroll p-1 [&::-webkit-scrollbar]:hidden">
+              {episodes?.map((episode) => {
+                return <PosterEpisode key={episode.id} episode={episode} />;
+              })}
             </motion.div>
           </Tabs.Content>
 
           <Tabs.Content value="tab-details">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="px-2">
-              <p>Title: {(itemType === "movie" && item.title) || (itemType === "show" && item.name)}</p>
-              <p>Tagline: {item.tagline}</p>
-              <p>Collection: {item.belongs_to_collection?.name}</p>
+              {title && <p>Title: {title}</p>}
+              {tagline && <p>Tagline: {tagline}</p>}
               <br />
 
-              <p>Runtime: {calculateRuntime(itemType === "movie" ? item.runtime : item.episode_run_time)}</p>
-              <p>Release Date: {item.release_date}</p>
-              <br />
+              {itemType === "movie" && (
+                <>
+                  <p>Release Date: {item.release_date}</p>
+                  <p>Runtime: {calculateRuntime(itemType === "movie" ? item.runtime : item.episode_run_time)}</p>
+                  <br />
+                </>
+              )}
+
+              {itemType === "show" && (
+                <>
+                  <p>Release Date (Latest Episode): {latestEpisodeAirDate}</p>
+                  <p>Runtime (Latest Episode): {latestEpisodeRuntime}</p>
+                  <br />
+                </>
+              )}
 
               <div>
-                <p>
-                  Genres:{" "}
-                  {item.genres.map((genre, i) => {
-                    return `${genre.name}${item.genres.length === i + 1 ? "" : ", "}`;
-                  })}
-                </p>
+                <p>Genres: {genres}</p>
               </div>
               <div>
                 <p>
@@ -133,12 +162,14 @@ export default function ItemDetails({ item, images, similarItems, itemType }) {
                   {item.homepage}
                 </a>
               </p>
-              <p>
-                IMDb:{" "}
-                <a href={item.imdb_id} target="_blank" rel="noreferrer">
-                  {item.imdb_id}
-                </a>
-              </p>
+              {itemType === "movie" && (
+                <p>
+                  IMDb:{" "}
+                  <a href={item.imdb_id} target="_blank" rel="noreferrer">
+                    {item.imdb_id}
+                  </a>
+                </p>
+              )}
               <br />
 
               <div>
@@ -151,12 +182,15 @@ export default function ItemDetails({ item, images, similarItems, itemType }) {
               </div>
               <div>
                 <p>Production Companies:</p>
-                <div className="grid grid-cols-4 gap-x-4 gap-y-6 py-4">
+                <div className="grid grid-cols-6 gap-x-4 gap-y-6 py-4">
                   {item.production_companies.map((company, i) => {
                     return (
-                      <div key={i} className="flex h-28 items-center justify-center overflow-hidden rounded-md bg-slate-800 p-4">
+                      <div
+                        key={i}
+                        className="flex h-24 items-center justify-center overflow-hidden rounded-md bg-slate-800 px-4 shadow-lg transition hover:scale-[.97]"
+                      >
                         {company.logo_path ? (
-                          <img src={logoBaseURL + company.logo_path} alt="" className="w-full rounded-md shadow-lg transition hover:scale-[.97]" />
+                          <img src={logoBaseURL + company.logo_path} alt="" className="max-h-20 " />
                         ) : (
                           <p className="text-center text-xl font-bold uppercase text-slate-400">{company.name}</p>
                         )}
@@ -168,6 +202,15 @@ export default function ItemDetails({ item, images, similarItems, itemType }) {
             </motion.div>
           </Tabs.Content>
         </Tabs.Root>
+      </div>
+
+      <div className="mx-auto max-w-7xl p-4">
+        <h2 className="mb-4 ml-2 text-xl font-bold uppercase">Similar</h2>
+        <div className="flex gap-4 overflow-x-scroll p-1 [&::-webkit-scrollbar]:hidden">
+          {similarItems?.map((item) => {
+            return <PosterTall key={item.id} item={item} itemType={itemType} />;
+          })}
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function MainRowItem({ item }) {
+export default function PosterCategory({ item }) {
   const title = item.title;
   const titleShort = item.titleShort;
 

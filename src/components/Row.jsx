@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useFetchList } from "../hooks/useFetchList";
-import RowItem from "./RowItem";
-import RowItemPeople from "./RowItemPeople";
+import PosterTall from "./PosterTall";
 
 export default function Row({ endpoint, id, title, rowType }) {
   const { isLoading, isError, error, data } = useFetchList(endpoint, id);
@@ -28,9 +27,9 @@ export default function Row({ endpoint, id, title, rowType }) {
       <div className="max-w-8xl flex gap-4 overflow-x-scroll p-1 [&::-webkit-scrollbar]:hidden">
         {data?.results.map((item) => {
           if (rowType === "movie" || rowType === "show" || rowType === "people") {
-            return <RowItem key={item.id} item={item} type={rowType} />;
+            return <PosterTall key={item.id} item={item} itemType={rowType} />;
           } else if (rowType === "mixed") {
-            return <RowItem key={item.id} item={item} type={item.media_type === "tv" ? "show" : item.media_type} />;
+            return <PosterTall key={item.id} item={item} itemType={item.media_type === "tv" ? "show" : item.media_type} />;
           }
         })}
       </div>

@@ -1,10 +1,10 @@
 import { backdropBaseURL } from "../utilites/tmdb";
 import { HiOutlinePlay, HiPlus } from "react-icons/hi2";
 import { Link } from "react-router-dom";
-import { useFetchTrending } from "../hooks/useFetchTrending";
+import { useFetchBanner } from "../hooks/useFetchBanner";
 
 export default function Banner() {
-  const { isLoading, isError, error, data } = useFetchTrending();
+  const { isLoading, isError, error, data } = useFetchBanner();
   const results = data?.results;
 
   if (isLoading) {
@@ -21,18 +21,20 @@ export default function Banner() {
               backgroundImage: `url(${backdropBaseURL + results?.[0].backdrop_path})`,
             }}
           >
-            <div className="absolute bottom-0 left-0 flex max-w-lg flex-col gap-4 p-12">
-              <p>{results?.[0].overview}</p>
+            <div className="h-full w-full" style={{ background: "linear-gradient(to top, rgba(15,23,42,1), rgba(15,23,42,0))" }}>
+              <div className="absolute bottom-0 left-0 flex max-w-lg flex-col gap-4 p-12">
+                <p>{results?.[0].overview}</p>
 
-              <div className="flex gap-[12px]">
-                <button className="flex items-center gap-2 rounded-md bg-slate-50 py-[6px] pl-6 pr-7 text-slate-900">
-                  <HiOutlinePlay />
-                  Play
-                </button>
-                <button className="flex items-center gap-2 rounded-md bg-slate-50 py-[6px] pl-6 pr-7 text-slate-900">
-                  <HiPlus />
-                  My list
-                </button>
+                <div className="flex gap-[12px]">
+                  <button className="flex items-center gap-2 rounded-md bg-slate-50 py-[6px] pl-6 pr-7 text-slate-900">
+                    <HiOutlinePlay />
+                    Play
+                  </button>
+                  <button className="flex items-center gap-2 rounded-md bg-slate-50 py-[6px] pl-6 pr-7 text-slate-900">
+                    <HiPlus />
+                    My list
+                  </button>
+                </div>
               </div>
             </div>
           </div>

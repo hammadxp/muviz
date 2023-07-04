@@ -27,8 +27,29 @@ export default function App() {
           <Route path="/watchlist" element={<UnfinishedPage />} />
           <Route path="/account" element={<UnfinishedPage />} />
 
+          <Route path="/discover/movies" element={<SectionPage />} />
+          <Route path="/discover/shows" element={<SectionPage />} />
+
+          <Route path="/trending/all" element={<SectionPage />} />
+          <Route path="/trending/movies" element={<SectionPage />} />
+          <Route path="/trending/shows" element={<SectionPage />} />
+          <Route path="/trending/people" element={<SectionPage />} />
+
+          <Route path="/movies/now-playing" element={<SectionPage />} />
+          <Route path="/shows/airing-today" element={<SectionPage />} />
+          <Route path="/shows/on-the-air" element={<SectionPage />} />
+
+          <Route path="/movies/popular" element={<SectionPage />} />
+          <Route path="/shows/popular" element={<SectionPage />} />
+
+          <Route path="/movies/top-rated" element={<SectionPage />} />
+          <Route path="/shows/top-rated" element={<SectionPage />} />
+
+          <Route path="/movies/upcoming" element={<SectionPage />} />
+
           <Route path="movie/:movieId" element={<ItemDetailsPage />} />
           <Route path="show/:showId" element={<ItemDetailsPage />} />
+          <Route path="collection/:collectionId" element={<UnfinishedPage />} />
 
           <Route path="*" element={<UndefinedPage />} />
         </Routes>

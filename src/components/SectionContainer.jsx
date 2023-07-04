@@ -1,4 +1,4 @@
-import SectionItem from "./SectionItem";
+import PosterWide from "./PosterWide";
 
 export default function SectionContainer({ items, title, sectionType }) {
   return (
@@ -7,9 +7,9 @@ export default function SectionContainer({ items, title, sectionType }) {
         <h2 className="text-3xl font-bold uppercase">{title}</h2>
       </div>
 
-      <div className="grid grid-cols-4 place-items-center gap-2">
+      <div className="grid grid-cols-4 place-items-center gap-4">
         {items.map((item) => (
-          <SectionItem key={item.id} item={item} sectionType={sectionType} />
+          <PosterWide key={item.id} item={item} sectionType={sectionType} />
         ))}
       </div>
     </div>

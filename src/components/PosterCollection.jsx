@@ -6,7 +6,7 @@ export default function PosterCollection({ title, posterId, collectionId }) {
 
   return (
     <Link to={"/collection/" + collectionId.toString()} className="block h-fit transition hover:scale-[.98]">
-      <div className="flex h-44 w-full items-center justify-center overflow-hidden rounded-md shadow-lg">
+      <div className="flex h-44 w-full items-center justify-center overflow-hidden rounded-md shadow-lg 600px:h-40">
         {poster ? (
           <img src={poster} alt={title + "backdrop"} loading="lazy" className="h-full w-full object-cover object-center" />
         ) : (

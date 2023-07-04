@@ -9,7 +9,7 @@ export default function PosterTall({ item, itemType }) {
     (itemType === "people" && item.profile_path && profileBaseURL + item.profile_path);
 
   return (
-    <Link to={itemType + "/" + item.id.toString()} className="block h-fit transition hover:scale-[.98]">
+    <Link to={"/" + itemType + "/" + item.id.toString()} className="block h-fit transition hover:scale-[.98]">
       <div className="flex h-52 w-36 items-center justify-center overflow-hidden rounded-md shadow-lg">
         {poster ? (
           <img src={poster} alt={title + "poster"} loading="lazy" className="h-full w-full object-cover object-center" />

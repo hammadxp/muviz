@@ -14,7 +14,7 @@ export default function Row({ endpoint, id, title, rowType }) {
   }
 
   return (
-    <div className="mt-4 flex flex-col">
+    <div className="mt-2 flex flex-col 600px:mt-0">
       {/* Row title area */}
       <div className="flex py-6">
         <h2 className="ml-2 text-xl font-bold uppercase">{title}</h2>

@@ -55,7 +55,7 @@ export default function App() {
         </Routes>
       </Router>
 
-      <ReactQueryDevtools position="bottom-left" initialIsOpen={false} />
+      {/* <ReactQueryDevtools position="bottom-left" initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }

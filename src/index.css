@@ -11,3 +11,15 @@
     @apply after:absolute after:-bottom-[3px] after:left-0 after:h-1 after:w-full after:rounded-full after:bg-slate-50 after:content-[''];
   }
 }
+
+@media (max-width: 75em) {
+  html {
+    font-size: 93.75%; /* 1200px */
+  }
+}
+
+@media (max-width: 59em) {
+  html {
+    font-size: 87.5%; /* 950px */
+  }
+}

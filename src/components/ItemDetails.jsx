@@ -33,7 +33,7 @@ export default function ItemDetails({ item, images, similarItems, episodes, item
       <ItemDetailsBgImage bgImage={bgImage}>
         <div className="mx-auto max-w-7xl px-4 py-16">
           {/* Title logo */}
-          <div className="flex h-48 w-80 items-center justify-center">
+          <div className="flex h-48 w-80 items-center justify-center 600px:mx-auto">
             {images?.logos.length === 0 || images?.logos === undefined ? (
               <span className="text-7xl font-bold uppercase">{title}</span>
             ) : (
@@ -43,7 +43,7 @@ export default function ItemDetails({ item, images, similarItems, episodes, item
 
           {/* Release Year & Runtime */}
           {itemType === "movie" && (
-            <div className="flex gap-1 font-semibold">
+            <div className="flex gap-1 font-semibold 600px:mx-auto 600px:w-fit">
               <span>{release_date}</span>
               <span>&middot;</span>
               <span>{runtime}</span>
@@ -51,7 +51,7 @@ export default function ItemDetails({ item, images, similarItems, episodes, item
           )}
 
           {itemType === "show" && (
-            <div className="flex gap-1 font-semibold">
+            <div className="flex gap-1 font-semibold 600px:mx-auto 600px:w-fit">
               <span>{latestEpisodeAirDate}</span>
               <span>&middot;</span>
               <span>S{latestSeason}</span>
@@ -60,26 +60,26 @@ export default function ItemDetails({ item, images, similarItems, episodes, item
           )}
 
           {/* Genres */}
-          <p className="py-1">{genres}</p>
+          <p className="py-1 600px:text-center">{genres}</p>
 
           {/* Buttons */}
-          <div className="flex gap-4 py-6">
-            <button className="flex items-center gap-2 rounded-md border-2 border-white bg-white px-6 py-3 font-semibold uppercase text-black">
+          <div className="flex gap-4 py-6 600px:mx-auto 600px:w-fit">
+            <button className="flex items-center gap-2 rounded-md border-2 border-white bg-slate-50 px-6 py-3 font-semibold uppercase text-black transition hover:border-slate-900 hover:bg-slate-900 hover:text-slate-50">
               <HiPlay className={"text-xl"} /> Play
             </button>
-            <button className="flex items-center gap-2 rounded-md border-2 border-white bg-slate-900/50 px-6 py-3 font-semibold uppercase">
+            <button className="flex items-center gap-2 rounded-md border-2 border-slate-50 bg-slate-900/60 px-6 py-3 font-semibold uppercase transition hover:border-transparent hover:bg-slate-900">
               Trailer
             </button>
-            <button className="rounded-full border-2 border-white bg-slate-900/50 px-2">
+            <button className="rounded-full border-2 border-slate-50 bg-slate-900/60 px-2 transition hover:border-transparent hover:bg-slate-900">
               <HiPlus size={"2em"} />
             </button>
-            <button className="rounded-full border-2 border-white bg-slate-900/50 px-2">
+            <button className="rounded-full border-2 border-slate-50 bg-slate-900/60 px-2 transition hover:border-transparent hover:bg-slate-900">
               <HiUserGroup size={"2em"} />
             </button>
           </div>
 
           {/* Overview */}
-          <p className="max-w-3xl py-4">{item.overview}</p>
+          <p className="max-w-3xl py-4 600px:text-center">{item.overview}</p>
         </div>
       </ItemDetailsBgImage>
 
@@ -107,7 +107,7 @@ export default function ItemDetails({ item, images, similarItems, episodes, item
 
           {collection && (
             <Tabs.Content value="tab-collection">
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-4 gap-x-4 gap-y-6">
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-4 gap-x-4 gap-y-6 600px:grid-cols-2">
                 <PosterCollection title={collection.name} posterId={collection.backdrop_path} collectionId={collection.id} />
               </motion.div>
             </Tabs.Content>
@@ -182,7 +182,7 @@ export default function ItemDetails({ item, images, similarItems, episodes, item
               </div>
               <div>
                 <p>Production Companies:</p>
-                <div className="grid grid-cols-6 gap-x-4 gap-y-6 py-4">
+                <div className="grid grid-cols-6 gap-x-4 gap-y-6 py-4 600px:grid-cols-3">
                   {item.production_companies.map((company, i) => {
                     return (
                       <div

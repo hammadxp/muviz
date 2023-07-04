@@ -4,7 +4,7 @@ import RowMain from "../components/RowMain";
 
 export default function HomePage() {
   return (
-    <div className="max-w-9xl p-8">
+    <div className="max-w-9xl p-8 600px:p-4">
       <Banner />
       <RowMain />
       <RowsContainer />

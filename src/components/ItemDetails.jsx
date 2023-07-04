@@ -8,8 +8,9 @@ import { motion } from "framer-motion";
 import PosterTall from "./PosterTall";
 import PosterCollection from "./PosterCollection";
 import PosterEpisode from "./PosterEpisode";
+import * as Dialog from "@radix-ui/react-dialog";
 
-export default function ItemDetails({ item, images, similarItems, episodes, itemType }) {
+export default function ItemDetails({ item, images, videos, videosRefetch, similarItems, episodes, itemType }) {
   if (!item) return;
 
   const title = (itemType === "movie" && item.title) || (itemType === "show" && item.name) || (itemType === "people" && item.name);
@@ -67,9 +68,31 @@ export default function ItemDetails({ item, images, similarItems, episodes, item
             <button className="flex items-center gap-2 rounded-md border-2 border-white bg-slate-50 px-6 py-3 font-semibold uppercase text-black transition hover:border-slate-900 hover:bg-slate-900 hover:text-slate-50">
               <HiPlay className={"text-xl"} /> Play
             </button>
-            <button className="flex items-center gap-2 rounded-md border-2 border-slate-50 bg-slate-900/60 px-6 py-3 font-semibold uppercase transition hover:border-transparent hover:bg-slate-900">
-              Trailer
-            </button>
+
+            <Dialog.Root>
+              <Dialog.Trigger asChild>
+                <button
+                  className="flex items-center gap-2 rounded-md border-2 border-slate-50 bg-slate-900/60 px-6 py-3 font-semibold uppercase transition hover:border-transparent hover:bg-slate-900"
+                  onClick={videosRefetch}
+                >
+                  Trailer
+                </button>
+              </Dialog.Trigger>
+
+              <Dialog.Portal>
+                <Dialog.Overlay className="fixed inset-0 z-30 bg-gray-900/80" />
+
+                <Dialog.Content className="fixed left-[50%] top-[50%] z-30 aspect-video w-[90vw] max-w-[854px] translate-x-[-50%] translate-y-[-50%] bg-black shadow-xl focus:outline-none">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${videos && videos[0].key}`}
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    className="h-full w-full"
+                  ></iframe>
+                </Dialog.Content>
+              </Dialog.Portal>
+            </Dialog.Root>
+
             <button className="rounded-full border-2 border-slate-50 bg-slate-900/60 px-2 transition hover:border-transparent hover:bg-slate-900">
               <HiPlus size={"2em"} />
             </button>

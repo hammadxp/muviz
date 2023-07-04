@@ -1,10 +1,10 @@
 import { useLocation, useParams } from "react-router-dom";
 import { useFetchItemDetails } from "../hooks/useFetchItemDetails";
 import { useFetchItemImages } from "../hooks/useFetchItemImages";
+import { useFetchItemVideos } from "../hooks/useFetchItemVideos";
 import { useFetchItemSimilar } from "../hooks/useFetchItemSimilar";
 import { useFetchItemEpisodes } from "../hooks/useFetchItemEpisodes";
 import ItemDetails from "../components/ItemDetails";
-import { useEffect } from "react";
 
 export default function ItemDetailsPage() {
   const url = useLocation();
@@ -15,6 +15,15 @@ export default function ItemDetailsPage() {
 
   const { isLoading, isError, error, data: itemData } = useFetchItemDetails(itemId, itemType);
   const { isLoading: imagesIsLoading, isError: imagesIsError, error: imagesError, data: imagesData } = useFetchItemImages(itemId, itemType);
+
+  const {
+    isLoading: videosIsLoading,
+    isError: videosIsError,
+    error: videosError,
+    data: videosData,
+    refetch: videosRefetch,
+  } = useFetchItemVideos(itemId, itemType);
+
   const {
     isLoading: similarItemsIsLoading,
     isError: similarItemsIsError,
@@ -36,6 +45,14 @@ export default function ItemDetailsPage() {
   }
 
   return (
-    <ItemDetails item={itemData} images={imagesData} similarItems={similarItemsData?.results} episodes={episodesData?.episodes} itemType={itemType} />
+    <ItemDetails
+      item={itemData}
+      images={imagesData}
+      videos={videosData?.results}
+      videosRefetch={videosRefetch}
+      similarItems={similarItemsData?.results}
+      episodes={episodesData?.episodes}
+      itemType={itemType}
+    />
   );
 }

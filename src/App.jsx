@@ -4,11 +4,12 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import HomePage from "./pages/HomePage";
 import NavBar from "./components/NavBar";
 import NavBarMargin from "./components/NavBarMargin";
+import NavBarMarginMobile from "./components/NavBarMarginMobile";
 import ItemDetailsPage from "./pages/ItemDetailsPage";
 import SectionPage from "./pages/SectionPage";
 import UndefinedPage from "./pages/UndefinedPage";
 import UnfinishedPage from "./pages/UnfinishedPage";
-import { Helmet, HelmetProvider } from "react-helmet-async";
+import { HelmetProvider } from "react-helmet-async";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,12 @@ export default function App() {
             <Route path="/originals" element={<SectionPage />} />
             <Route path="/watchlist" element={<UnfinishedPage />} />
             <Route path="/account" element={<UnfinishedPage />} />
+
+            <Route path="/category/disney" element={<SectionPage />} />
+            <Route path="/category/pixar" element={<SectionPage />} />
+            <Route path="/category/marvel" element={<SectionPage />} />
+            <Route path="/category/star-wars" element={<SectionPage />} />
+            <Route path="/category/national-geographic" element={<SectionPage />} />
 
             <Route path="/discover/movies" element={<SectionPage />} />
             <Route path="/discover/shows" element={<SectionPage />} />
@@ -55,6 +62,8 @@ export default function App() {
 
             <Route path="*" element={<UndefinedPage />} />
           </Routes>
+
+          <NavBarMarginMobile />
         </Router>
 
         {/* <ReactQueryDevtools position="bottom-left" initialIsOpen={false} /> */}

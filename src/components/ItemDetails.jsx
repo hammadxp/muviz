@@ -10,7 +10,6 @@ import PosterCollection from "./PosterCollection";
 import PosterEpisode from "./PosterEpisode";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Helmet } from "react-helmet-async";
-import { baseURL } from "../utilites/tmdb";
 
 export default function ItemDetails({ item, images, videos, videosRefetch, similarItems, episodes, itemType }) {
   if (!item) return;
@@ -94,7 +93,7 @@ export default function ItemDetails({ item, images, videos, videosRefetch, simil
                 </Dialog.Trigger>
 
                 <Dialog.Portal>
-                  <Dialog.Overlay className="fixed inset-0 z-30 bg-gray-900/80" />
+                  <Dialog.Overlay className="fixed inset-0 z-30 bg-gray-900 bg-opacity-50 backdrop-blur backdrop-filter" />
 
                   <Dialog.Content className="fixed left-[50%] top-[50%] z-30 aspect-video w-[90vw] max-w-[854px] translate-x-[-50%] translate-y-[-50%] bg-black shadow-xl focus:outline-none">
                     <iframe

@@ -101,7 +101,7 @@ export default function NavBar() {
           <span className="mx-auto cursor-default text-xl font-bold uppercase">Muviz</span>
         </div>
 
-        <NavMenu.Root className="fixed bottom-0 left-0 z-20 flex h-[60px] w-full justify-center bg-slate-900">
+        <NavMenu.Root className="fixed bottom-0 left-0 z-20 flex h-[60px] w-full justify-center border-t-2 border-slate-800 bg-slate-900">
           <NavMenu.List className="flex h-full w-[24rem] items-center justify-between">
             <NavMenu.Item>
               <NavMenu.Link asChild>

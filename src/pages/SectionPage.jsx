@@ -27,6 +27,32 @@ export default function SectionPage() {
       sectionType = "mixed";
       break;
 
+    case "/category/disney":
+      endpoint = `${endpointBase}/search/multi?query=disney`;
+      title = "Disney";
+      sectionType = "mixed";
+      break;
+    case "/category/pixar":
+      endpoint = `${endpointBase}/search/multi?query=pixar`;
+      title = "Pixar";
+      sectionType = "mixed";
+      break;
+    case "/category/marvel":
+      endpoint = `${endpointBase}/search/multi?query=marvel`;
+      title = "Marvel";
+      sectionType = "mixed";
+      break;
+    case "/category/star-wars":
+      endpoint = `${endpointBase}/search/multi?query=star-wars`;
+      title = "Star Wars";
+      sectionType = "mixed";
+      break;
+    case "/category/national-geographic":
+      endpoint = `${endpointBase}/search/multi?query=national-geographic`;
+      title = "National Geographic";
+      sectionType = "mixed";
+      break;
+
     case "/discover/movies":
       endpoint = `${endpointBase}/discover/movie`;
       title = "Discover /Movies";
@@ -107,7 +133,7 @@ export default function SectionPage() {
   const { isLoading, isError, error, data } = useFetchSection(endpoint, url.pathname);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p className="flex h-[80vh] items-center justify-center text-xl font-bold 600px:h-[70vh]">Loading...</p>;
   }
 
   if (isError) {

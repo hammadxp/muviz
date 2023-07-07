@@ -1,4 +1,5 @@
 export const queryOptions = {
-  // refetchOnMount: false,
   refetchOnWindowFocus: false,
+  // refetchOnMount: false,
+  // staleTime: 300000,
 };

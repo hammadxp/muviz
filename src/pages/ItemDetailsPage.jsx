@@ -41,7 +41,7 @@ export default function ItemDetailsPage() {
   } = useFetchItemEpisodes(itemId, seasonNumber);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p className="flex h-[80vh] items-center justify-center text-xl font-bold 600px:h-[70vh]">Loading...</p>;
   }
 
   return (

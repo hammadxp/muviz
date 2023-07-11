@@ -6,9 +6,9 @@ import PosterWide from "./PosterWide";
 export default function Row({ endpoint, id, title, rowType, posterWide }) {
   const { isLoading, isError, error, data } = useFetchList(endpoint, id);
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+  // if (isLoading) {
+  //   return <p>Loading...</p>;
+  // }
 
   if (isError) {
     return <p>{error}</p>;

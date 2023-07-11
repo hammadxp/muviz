@@ -7,14 +7,14 @@ export default function Banner() {
   const { isLoading, isError, error, data } = useFetchBanner();
   const results = data?.results;
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+  // if (isLoading) {
+  //   return <p>Loading...</p>;
+  // }
 
   return (
     <div className="flex w-full gap-6 600px:flex-col" id="banner">
       <div className="h-96 w-2/3 600px:h-72 600px:w-full">
-        <Link to={`${results[0].media_type}/${results[0].id.toString()}`}>
+        <Link to={`${results && results[0].media_type}/${results && results[0].id.toString()}`}>
           <div
             className="relative h-full rounded-xl bg-cover bg-center bg-no-repeat transition hover:scale-[.99]"
             style={{
@@ -43,7 +43,7 @@ export default function Banner() {
 
       <div className="flex h-96 w-1/3 flex-col gap-6 600px:h-fit 600px:w-full 600px:flex-row">
         <Link
-          to={`${results[1].media_type}/${results[1].id.toString()}`}
+          to={`${results && results[1].media_type}/${results && results[1].id.toString()}`}
           className="h-[calc(50%-12px)] w-full overflow-hidden rounded-xl shadow-2xl transition hover:scale-[.99] 600px:h-32"
         >
           <img
@@ -53,7 +53,7 @@ export default function Banner() {
           />
         </Link>
         <Link
-          to={`${results[2].media_type}/${results[2].id.toString()}`}
+          to={`${results && results[2].media_type}/${results && results[2].id.toString()}`}
           className="h-[calc(50%-12px)] w-full overflow-hidden rounded-xl shadow-2xl transition hover:scale-[.99] 600px:h-32"
         >
           <img
